@@ -8,7 +8,7 @@ using UnityEngine.InputSystem; // Adding the possibility for more complicated re
 public class PlayerControls : MonoBehaviour
 {
     
-    //test
+    //test Test Test
     
     //Creating a reference to the players rigidbody
     public Rigidbody2D rigidBody;
