@@ -1,5 +1,3 @@
-
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +5,7 @@ using UnityEngine.InputSystem; // Adding the possibility for more complicated re
 
 public class PlayerControls : MonoBehaviour
 {
-    
-    //test Test Test
+
     
     //Creating a reference to the players rigidbody
     public Rigidbody2D rigidBody;
@@ -20,20 +17,25 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private float moveSpeed;
 
 
+    //Vector 2 Variable to store the movement of the player to later be assigned in update
+    Vector2 playerMovement;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        //Tying the rigidbody and personal project to itself
-        rigidBody = GetComponent<Rigidbody2D>();
-        personalProject1 = new PersonalProject1();
+        //Tying the rigidbody and personal project to itself (Not sure if I really need these, as to why they're permanently commented out)
+        //rigidBody = GetComponent<Rigidbody2D>();
+        //personalProject1 = new PersonalProject1();
 
     }
 
     //Making the OnMove method to be called by the Send Message option in the Input System
     public void OnMove(InputValue inputValue){ //Passing input value in as "iV" 
 
-        //Assigning the velocity of the rigidBody to the input value gotten from a vector2 and multiplied by moveSpeed
-        rigidBody.velocity = inputValue.Get<Vector2>() * moveSpeed;
+        //Assigning the playerMovement vector2 to the inputvalue vector 2 from the input system
+        playerMovement = inputValue.Get<Vector2>() * moveSpeed;
+        
 
     }
 
@@ -42,5 +44,13 @@ public class PlayerControls : MonoBehaviour
     void Update()
     {
         
+    }
+
+    //Fixed Update is called at a more consistent time, instead of every frame so lag doesnt impact it
+    void FixedUpdate(){
+
+        //Assigning the vector2 playerMovement to the rigidBody's velocity
+        rigidBody.velocity = playerMovement;
+
     }
 }
