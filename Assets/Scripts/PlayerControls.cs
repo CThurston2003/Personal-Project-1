@@ -1,4 +1,5 @@
 
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ using UnityEngine.InputSystem; // Adding the possibility for more complicated re
 
 public class PlayerControls : MonoBehaviour
 {
+    
+    //test
+    
     //Creating a reference to the players rigidbody
     public Rigidbody2D rigidBody;
 
