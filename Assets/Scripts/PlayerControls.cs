@@ -1,3 +1,8 @@
+/// Author: Caleb Thurston (CAT)
+/// Description: Player Movement code for a personal project in Unity
+/// Script Language: C#
+/// Date Created: Sometime around end of February 2024 (Don't remember exact day)
+//-----------------------------Dependencies--------------------------------------------------------------
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,32 +11,27 @@ using UnityEngine.InputSystem; // Adding the possibility for more complicated re
 public class PlayerControls : MonoBehaviour
 {
 
+//--------------------------Public variables to be editable in Unity-----------------------------------------
+
     //Variables related to the dodging mechanic
     public float dodgeVal = 5;  //Value by which the player moves when dodging
     public float dodgeTimer = 5f; //Making a dodge increment timer (later converted to milliseconds)
-    //public int dodgeIncrement = 5; //Value of milliseconds to add force
+    public Animator animator; //Creating a reference to the player animator
+    public Rigidbody2D rigidBody; //Creating a reference to the players rigidbody
+    private PersonalProject1 personalProject1; //Creating a reference to the players inputs
+    [SerializeField] private float moveSpeed; //Creating a reference to player moveSpeed
+    Vector2 playerMovement; //Vector 2 Variable to store the movement of the player to later be assigned in update
+    public SpriteRenderer spriteRenderer; //referencing the character sprite renderer component
 
-
-    //Creating a reference to the players rigidbody
-    public Rigidbody2D rigidBody;
-
-    //Creating a reference to the players inputs
-    private PersonalProject1 personalProject1;
-
-    //Creating a reference to player moveSpeed
-    [SerializeField] private float moveSpeed;
-
-
-    //Vector 2 Variable to store the movement of the player to later be assigned in update
-    Vector2 playerMovement;
+//-------------------Start method--------------------------------------------
 
     // Start is called before the first frame update
     void Start()
     {
-        //Tying the rigidbody and personal project to itself (Not sure if I really need these, as to why they're permanently commented out)
-        //rigidBody = GetComponent<Rigidbody2D>();
-        //personalProject1 = new PersonalProject1();
+        
     }
+
+//--------------------Move Method------------------------------------
 
     //Making the OnMove method to be called by the Send Message option in the Input System
     public void OnMove(InputValue inputValue){ //Passing input value in as "iV" 
@@ -39,23 +39,55 @@ public class PlayerControls : MonoBehaviour
         //Assigning the playerMovement vector2 to the inputvalue vector 2 from the input system
         playerMovement = inputValue.Get<Vector2>() * moveSpeed;
         
+        
+
+        //If methods to determine which animation to play
+        //Each of these if statements reads the value of the vector2 from player input to decide if player is going up/down/left/right
+        if(inputValue.Get<Vector2>().x > 0 && 
+        (Mathf.Abs(inputValue.Get<Vector2>().x) > Mathf.Abs(inputValue.Get<Vector2>().y))){
+
+            //Code for runningAnim to the right
+            animator.SetBool("IsMoveUp",false);
+            animator.SetBool("IsMoveDown",false);
+            animator.SetBool("IsMoveRight",true);
+            spriteRenderer.flipX = false;
+
+        }else if(inputValue.Get<Vector2>().x < 0 && 
+        (Mathf.Abs(inputValue.Get<Vector2>().x) > Mathf.Abs(inputValue.Get<Vector2>().y))){
+
+            //Code for runningAnim to the left
+            animator.SetBool("IsMoveUp",false);
+            animator.SetBool("IsMoveDown",false);
+            animator.SetBool("IsMoveRight",true);
+            spriteRenderer.flipX = true;
+        
+        }else if(inputValue.Get<Vector2>().y > 0 && 
+        (Mathf.Abs(inputValue.Get<Vector2>().y) > Mathf.Abs(inputValue.Get<Vector2>().x))){
+
+            //Code for runningAnim up
+            animator.SetBool("IsMoveRight",false);
+            animator.SetBool("IsMoveDown",false);
+            animator.SetBool("IsMoveUp",true);
+
+        }else if(inputValue.Get<Vector2>().y < 0 && 
+        (Mathf.Abs(inputValue.Get<Vector2>().y) > Mathf.Abs(inputValue.Get<Vector2>().x))){
+
+            //Code for runningAnim down
+            animator.SetBool("IsMoveUp",false);
+            animator.SetBool("IsMoveRight",false);
+            animator.SetBool("IsMoveDown",true);
+
+        }
 
     }
+
+//---------------------Section for the Dodge Mechanic-----------------------------------------------------
 
     //Function for the dodge
     void OnDodge(){
 
-        Debug.Log("Dodging!");
-        
-        //Adding Force to the rigidBody
-        //rigidBody.AddForce(playerMovement * dodgeVal);
-
-        //Adding dodgeVal to the rigidBody by modifying velocity (Doesnt work)
-        //rigidBody.velocity += playerMovement * dodgeVal;
-
-        //Making a Coroutine to add force incrementally
+        //Calling the dodge coroutine
         StartCoroutine(incrementDodge());
-        
 
     }
 
@@ -81,12 +113,21 @@ public class PlayerControls : MonoBehaviour
 
     }
 
+//-----------------------------------------Fixed update method--------------------------------------------
 
     //Fixed Update is called at a more consistent time, instead of every frame so lag doesnt impact it
     void FixedUpdate(){
 
         //Assigning the vector2 playerMovement to the rigidBody's velocity
         rigidBody.velocity = playerMovement;
+        if(Mathf.Approximately(rigidBody.velocity.x,0) && Mathf.Approximately(rigidBody.velocity.y,0)){
+
+            //Setting all the animation triggers to false so the idle anim will play
+            animator.SetBool("IsMoveRight",false);
+            animator.SetBool("IsMoveUp",false);
+            animator.SetBool("IsMoveDown",false);
+
+        }
 
     }
 }

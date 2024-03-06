@@ -2771,6 +2771,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3142189220796752578, guid: cd7184c55bfd77842a9ffd16709ff4a0, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2834,8 +2838,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dodgeVal: 250
   dodgeTimer: 5
+  animator: {fileID: 8849324162778010966}
   rigidBody: {fileID: 8849324162778010963}
   moveSpeed: 1
+  spriteRenderer: {fileID: 8849324162778010969}
 --- !u!114 &8849324162778010965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2866,6 +2872,11 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!95 &8849324162778010966 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5117890801161273078, guid: cd7184c55bfd77842a9ffd16709ff4a0, type: 3}
+  m_PrefabInstance: {fileID: 8849324162778010961}
+  m_PrefabAsset: {fileID: 0}
 --- !u!70 &8849324162778010968
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2901,6 +2912,11 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0071062073, y: -0.067114525}
   m_Size: {x: 0.1594295, y: 0.22259606}
   m_Direction: 0
+--- !u!212 &8849324162778010969 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3142189220796752578, guid: cd7184c55bfd77842a9ffd16709ff4a0, type: 3}
+  m_PrefabInstance: {fileID: 8849324162778010961}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
