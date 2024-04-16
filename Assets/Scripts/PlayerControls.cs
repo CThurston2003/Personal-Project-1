@@ -34,7 +34,7 @@ public class PlayerControls : MonoBehaviour
 //--------------------Move Method------------------------------------
 
     //Making the OnMove method to be called by the Send Message option in the Input System
-    public void OnMove(InputValue inputValue){ //Passing input value in as "iV" 
+    public void OnMove(InputValue inputValue){ //Passing input value in as "inputValue" 
 
         //Assigning the playerMovement vector2 to the inputvalue vector 2 from the input system
         playerMovement = inputValue.Get<Vector2>() * moveSpeed;
