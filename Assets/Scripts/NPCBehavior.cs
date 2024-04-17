@@ -12,6 +12,7 @@ using UnityEngine;
 
 // Things to implement in the future
 // For npc wandering to not cause NPCs to repeatedly walk into walls
+// Fix npc being sent sliding by colliding with objects like the player
 
 public class NPCBehavior : MonoBehaviour
 {
