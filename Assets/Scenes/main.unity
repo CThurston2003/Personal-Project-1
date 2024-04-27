@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 921330274}
   - component: {fileID: 921330273}
   - component: {fileID: 921330272}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: groundTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5587,8 +5587,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: BasicNPC
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 712959351817294402, guid: a2c2d0474e07a8b4fbb7b1be4eafaead, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -5692,6 +5691,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6080329159726604468, guid: cd7184c55bfd77842a9ffd16709ff4a0, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8849324162778010963}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
